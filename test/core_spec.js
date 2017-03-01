@@ -78,10 +78,12 @@ describe('application logic', () => {
 
         it('marks winner when just one entry left', () => {
             const state = Map({
-                pair: List.of('Trainspotting', '28 Days Later'),
-                tally: Map({
-                    'Trainspotting': 4,
-                    '28 Days Later': 2
+                vote: Map({
+                    pair: List.of('Trainspotting', '28 Days Later'),
+                    tally: Map({
+                        'Trainspotting': 4,
+                        '28 Days Later': 2
+                    })
                 }),
                 entries: List()
             });
