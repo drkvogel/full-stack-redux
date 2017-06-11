@@ -2,7 +2,7 @@ import {List, Map} from 'immutable';
 import {expect} from 'chai';
 import {setEntries, next, vote} from '../src/core';
 
-describe('application logic', () => {
+describe('application logic', () => { // mocha
     describe('setEntries', () => {
         it('adds the entries to the state', () => {
             const state = Map();
@@ -95,23 +95,19 @@ describe('application logic', () => {
 
     });
 
+    // Our application is so tiny that we don't have a problem of this kind yet, but we do already have one opportunity to improve on this: There is no reason for the vote function to receive the whole app state, since it only works on the 'vote' part of it.
+
     describe('vote', () => {
         it('creates a tally for the voted entry', () => {
             const state = Map({
-                vote: Map({
-                    pair: List.of('Trainspotting', '28 Days Later')
-                }),
-                entries: List()
-            })
+                pair: List.of('Trainspotting', '28 Days Later')
+            });
             const nextState = vote(state, 'Trainspotting');
             expect(nextState).to.equal(Map({
-                vote: Map({
-                    pair: List.of('Trainspotting', '28 Days Later'),
-                    tally: Map({
-                        'Trainspotting': 1
-                    })
-                }),
-                entries: List()
+                pair: List.of('Trainspotting', '28 Days Later'),
+                tally: Map({
+                    'Trainspotting': 1
+                })
             }));
         });
 
